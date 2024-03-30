@@ -4,6 +4,11 @@ namespace entityFrameworkCoreApp.Data
 {
     public class DataContext : DbContext        
     {
+        public DataContext(DbContextOptions<DataContext> options):base(options) 
+        {
+
+        } 
+        //options bilgisini dışarıdan alamadığı için burda bunu yazdık .
         // Mesela yeni bir kurs ekleyecek isek
         // DataContext ten üretilen nesle ile Aşağıdaki datalara erişeceğiz ve
         // üzerlerine ekleyeceğiz.
