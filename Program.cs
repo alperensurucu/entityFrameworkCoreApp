@@ -6,9 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<DataContext>(option =>
+builder.Services.AddDbContext<DataContext>(options =>
 {
-    option.UseSqlite();
+    var config = builder.Configuration;
+    var connectionString = config.GetConnectionString("dataabse");
+    
+    options.UseSqlite(connectionString);
 });
 
 var app = builder.Build();
