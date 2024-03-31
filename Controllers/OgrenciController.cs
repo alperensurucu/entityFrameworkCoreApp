@@ -1,5 +1,6 @@
 ﻿using entityFrameworkCoreApp.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace entityFrameworkCoreApp.Controllers
 {
@@ -12,6 +13,10 @@ namespace entityFrameworkCoreApp.Controllers
             _context = context;
 
         }
+        public async Task<IActionResult> Index()  //öğrenciler i listeliyoruz burada .
+        {
+            return View(await _context.Ogrenciler.ToListAsync());
+        }
         public IActionResult Create()
         {
             return View();
@@ -21,7 +26,7 @@ namespace entityFrameworkCoreApp.Controllers
         {
             _context.Ogrenciler.Add(model);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Ogrenci>
+
+<table class="table"
+    <thead>
+        <tr>
+            <td>Öğrenci Id</td>
+            <td>Öğrenci Ad</td>
+            <td>Öğrenci Soyad</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ogrenci in Model)
+        {
+            <tr>
+                <td>@ogrenci.Id</td>
+                <td>@ogrenci.OgrenciAd</td>
+                <td>@ogrenci.OgrenciSoyad</td>
+                <td><a href=""class="btn btn-sm btn-primary">Details</a>
+                <td><a href=""class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>    
+</table>
