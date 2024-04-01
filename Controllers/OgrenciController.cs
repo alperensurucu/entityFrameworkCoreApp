@@ -1,6 +1,7 @@
 ﻿using entityFrameworkCoreApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace entityFrameworkCoreApp.Controllers
 {
@@ -27,6 +28,54 @@ namespace entityFrameworkCoreApp.Controllers
             _context.Ogrenciler.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var ogr = await _context.Ogrenciler.FindAsync(id);
+
+            if (ogr == null)
+            {
+                return NotFound();
+            }
+            return View(ogr);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id , Ogrenci model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+            if(ModelState.IsValid) 
+            {
+                try
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                    if (!_context.Ogrenciler.Any(o => o.Id == model.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
+               
+            }
+            return View(model);
+
         }
     }
 }
