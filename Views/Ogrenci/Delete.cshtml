@@ -3,7 +3,7 @@
     <b>@Model.OgrenciAd @Model.OgrenciSoyad</b> isimli öğrenciyi silmek istiyor musunuz?
 
     <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="@Model.Id">
+        <input type="hidden" value="@Model.Id"name="id">
         <button type="submit" class="btn btn-danger">Evet</button>
         <a asp-action="Index" class="btn btn-primary">Hayır</a> 
     </form>      
